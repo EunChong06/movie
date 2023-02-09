@@ -1,11 +1,11 @@
 import axios from 'axios';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
-const Popular = () =>{
+const Tv = () => {
     const [movies, setMovies] = useState([]);
     const fetchMovies = async () => {
         const movie = await axios({
-            url: `https://api.themoviedb.org/3/movie/popular?api_key=3cc05ada7e70628b8d1bf36e4d1f6fd7&language=ru-RU&page=1`,
+            url: `https://api.themoviedb.org/3/tv/popular?api_key=3cc05ada7e70628b8d1bf36e4d1f6fd7&language=en-US&page=1`,
             method: 'get'
         })
         console.log('movies', movie);
@@ -16,7 +16,7 @@ const Popular = () =>{
     useEffect(() => {
         fetchMovies();
     }, [])
-    return(
+    return (
         <div>
             <div className='container-fluid'>
                 <div className='row text-center bg-dark text-light'>
@@ -34,7 +34,7 @@ const Popular = () =>{
                 </div>
                 <div className='row'>
                     <div className='col-12 my-3'>
-                        <h4>Популярные фильмы</h4>
+                        <h4>Популярные TV</h4>
                     </div>
                     <div className='col-2'>
                         <button className='form-control'><b>Сортировать</b></button>
@@ -42,23 +42,23 @@ const Popular = () =>{
                         <button className='form-control'><b>Где посмотреть</b></button>
                     </div>
                     {movies.length > 0 ?
-                                    <>
-                                        {movies.map((item) =>
-                                            <div className='col-2 px-3'>
-                                                <img src={'https://www.themoviedb.org/t/p/w220_and_h330_face' + item.backdrop_path} width="100%" />
-                                                <a href={'/movie/' + item.id}><b>{item.title}</b></a>
-                                                <br />
-                                                <i>{moment(item.release_date, "YYYYMMDD").fromNow()}</i>
-                                            </div>
-                                        )
-                                        }
-                                    </>
-                                    :
-                                    <></>
-                                }
+                        <>
+                            {movies.map((item) =>
+                                <div className='col-2 px-3'>
+                                    <img src={'https://www.themoviedb.org/t/p/w220_and_h330_face' + item.backdrop_path} width="100%" />
+                                    <a href={'/serials/' + item.id}><b>{item.name}</b></a>
+                                    <br />
+                                    <i>{moment(item.first_air_date, "YYYYMMDD").fromNow()}</i>
+                                </div>
+                            )
+                            }
+                        </>
+                        :
+                        <></>
+                    }
                 </div>
             </div>
         </div>
     )
 }
-export default Popular;
+export default Tv;

@@ -3,14 +3,14 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-const Movie = () => {
+const Serials = () => {
     const [details, setDetails] = useState(null);
     const [videos, setVideos] = useState([]);
     const params = useParams();
     const id = params.id;
     const fetchDetails = async () => {
         const detail = await axios({
-            url: `https://api.themoviedb.org/3/movie/${id}?api_key=3cc05ada7e70628b8d1bf36e4d1f6fd7&language=ru-RU`,
+            url: `https://api.themoviedb.org/3/tv/${id}?api_key=3cc05ada7e70628b8d1bf36e4d1f6fd7&language=ru-Ru`,
 
         })
         console.log('details', detail);
@@ -20,7 +20,7 @@ const Movie = () => {
     }
     const videoDetails = async () => {
         const video = await axios({
-            url:`https://api.themoviedb.org/3/movie/${id}/videos?api_key=3cc05ada7e70628b8d1bf36e4d1f6fd7&language=ru-RU`
+            url:`https://api.themoviedb.org/3/tv/${id}/videos?api_key=3cc05ada7e70628b8d1bf36e4d1f6fd7&language=ru-RU`
         })
         console.log('video',video);
         if (video !=null){
@@ -106,4 +106,4 @@ const Movie = () => {
         </div>
     )
 }
-export default Movie;
+export default Serials;
